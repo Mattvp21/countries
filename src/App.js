@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faMoon} from '@fortawesome/free-solid-svg-icons'
+import {faSun} from '@fortawesome/free-solid-svg-icons'
+import { createContext, useState } from "react";
+import Home from './pages/Home';
+import SingleCountry from './pages/SingleCountry'
+
+export const ThemeContext = createContext(null)
 
 function App() {
+  const [theme, setTheme] = useState('light')
+  
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === 'light' ? 'dark' : 'light'))
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
+      <div className="d-flex site-container flex-column" id={theme}>
+    <BrowserRouter>
+    <header>
+          <h1>Where in the world?</h1>
+      
+        <div className="icon">{
+          theme === 'light' ? (
+            <FontAwesomeIcon style={{'width' : '40px', 'height' : '30px', 'cursor': 'pointer'}}  onClick={toggleTheme} icon={faMoon} />
+          ) : (
+            <FontAwesomeIcon style={{'color' : 'white', 'width' : '40px', 'height' : '30px', 'cursor': 'pointer'}} onClick={toggleTheme} icon={faSun} />
+          )
+        }
+        
+        <p>{theme === 'light' ? 'Dark' : 'Light'} mode</p>
+        </div>
+        
+    </header>
+            <Routes>
+              <Route path='/' element={<Home/>}/>
+              <Route path='/:name' element={<SingleCountry/>}/>
+            </Routes>
+     </BrowserRouter>
     </div>
+    </ThemeContext.Provider>
+    
   );
 }
 
