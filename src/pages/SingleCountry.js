@@ -6,7 +6,7 @@ import {faArrowRotateLeft} from '@fortawesome/free-solid-svg-icons'
 
 function SingleCountry() {
    
-    const { name } = useParams();
+    const { alpha3Code } = useParams();
      
     const [singleCountry, setSingleCountry] = useState([]);
     const [singleCountryImage, setSingleCountryImage] = useState([]);
@@ -14,17 +14,17 @@ function SingleCountry() {
 
     useEffect(() => {
         const getData = () => {
-            fetch(`https://restcountries.com/v2/name/${name}`)
+            fetch(`https://restcountries.com/v2/alpha/${alpha3Code.toLowerCase()}`)
            .then(response => response.json())
            .then(country => {
-                   setSingleCountry(country[0])
-                   setSingleCountryImage(country[0].flags.svg)
+                   setSingleCountry(country)
+                   setSingleCountryImage(country.flags.svg)
             } )
        }
         getData()
         
-      }, [name]) 
-      
+      }, [alpha3Code]) 
+
     console.log(singleCountry.languages)
     return (
         <div>

@@ -37,7 +37,7 @@ function App() {
     </header>
             <Routes>
               <Route path='/' element={<Home/>}/>
-              <Route path='/:name' element={<SingleCountry/>}/>
+              <Route path='/:alpha3Code' element={<SingleCountry/>}/>
             </Routes>
      </BrowserRouter>
     </div>

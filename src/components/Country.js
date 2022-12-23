@@ -3,13 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Country({country}) {
-    const {name, region, flags, population, capital} = country
+    const { alpha3Code ,name, region, flags, population, capital} = country
     return (
         <div className='card-container'>
             <div className='card' >
                 
                 
-                <Link to={`/${name}`}><img className='image' src={flags.png} alt={name}/></Link>
+                <Link to={`/${alpha3Code}`}><img className='image' src={flags.png} alt={name}/></Link>
              
                  
              <div className='card-list'>
