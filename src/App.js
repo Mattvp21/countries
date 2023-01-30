@@ -3,17 +3,20 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faMoon} from '@fortawesome/free-solid-svg-icons'
 import {faSun} from '@fortawesome/free-solid-svg-icons'
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Home from './pages/Home';
 import SingleCountry from './pages/SingleCountry'
 
 export const ThemeContext = createContext(null)
 
+
+
 function App() {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState("light")
+
   
   const toggleTheme = () => {
-    setTheme((curr) => (curr === 'light' ? 'dark' : 'light'))
+    setTheme((curr) => (curr === "light" ? "dark" : "light"))
   }
   
   return (
@@ -26,7 +29,7 @@ function App() {
         <div className="icon">{
           theme === 'light' ? (
             <FontAwesomeIcon style={{'width' : '40px', 'height' : '30px', 'cursor': 'pointer'}}  onClick={toggleTheme} icon={faMoon} />
-          ) : (
+          )  : (
             <FontAwesomeIcon style={{'color' : 'white', 'width' : '40px', 'height' : '30px', 'cursor': 'pointer'}} onClick={toggleTheme} icon={faSun} />
           )
         }

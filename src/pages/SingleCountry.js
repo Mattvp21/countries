@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowRotateLeft} from '@fortawesome/free-solid-svg-icons'
-
+import {Vortex} from 'react-loader-spinner'
 function SingleCountry() {
    
     const { alpha3Code } = useParams();
-     
+    const [loading, setLoading] = useState(true)
     const [singleCountry, setSingleCountry] = useState([]);
     const [singleCountryImage, setSingleCountryImage] = useState([]);
    
@@ -20,6 +20,7 @@ function SingleCountry() {
                    setSingleCountry(country)
                    setSingleCountryImage(country.flags.svg)
             } )
+            .finally(() =>  setLoading(false) )
        }
         getData()
         
@@ -27,7 +28,21 @@ function SingleCountry() {
 
     console.log(singleCountry.languages)
     return (
-        <div>
+        loading ? (
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+            <Vortex
+  visible={true}
+  height="200px"
+  width="200px"
+  
+  ariaLabel="vortex-loading"
+  wrapperStyle={{}}
+  wrapperClass="vortex-wrapper"
+  colors={['hsl(209, 23%, 22%)', 'hsl(207, 26%, 17%)', 'hsl(200, 15%, 8%)', 'hsl(0, 0%, 52%)', 'hsl(0, 0%, 98%)', 'hsl(0, 0%, 100%)']}
+/> 
+        </div>
+        ) : (
+            <div>
         <div className='btn-container'>
             <Link to='/'>
             <button className='btn-container__button'><FontAwesomeIcon icon={faArrowRotateLeft}> </FontAwesomeIcon>Back</button>
@@ -78,6 +93,8 @@ function SingleCountry() {
               
         </div>
           
+        )
+        
     );
 }
 
